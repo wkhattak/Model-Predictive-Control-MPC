@@ -15,7 +15,7 @@ The MPC reframes the task of following a trajectory to an optimization problem b
 
 The MPC is based on the global Kinematic Model that is a simple real-time model easily applicable to different types of vehicle and accuracy wise is as good as its complex counterparts. It uses the current state of the car [position, orientation, velocity, cross track error, orientation error] and the actuator values [steering angle, throttle] for making future state & actuator predictions. Below are the equations that define the model:
 
-![Model equations](./images/model_equations.png)
+![Model equations](./images/model.png)
 
 Following steps illustrate the workings of the MPC:
 
