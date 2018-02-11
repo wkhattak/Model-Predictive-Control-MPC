@@ -7,7 +7,7 @@ This project is about using [Model Predictive Control (MPC)](https://en.wikipedi
 
 ## How Does It Work?
 
-The MPC reframes the task of following a trajectory to an optimization problem by finding the best combination of steering angle & throttle values . The MPC is fed the initial state of the car [position, orientation, velocity, cross track error, orientation error]. Using the [Kinematic](https://en.wikipedia.org/wiki/Kinematics) vehicle model, actuator limitations and a cost funcion, the MPC then predicts the best possible actuator inputs (steering & throttle) by finding the lowest cost trajectory. 
+The MPC reframes the task of following a trajectory to an optimization problem by finding the best combination of steering angle & throttle values . The MPC is fed the initial state of the car [position, orientation, velocity, cross track error, orientation error]. Using the [Kinematic](https://en.wikipedia.org/wiki/Kinematics) vehicle model, actuator limitations and a cost function, the MPC then predicts the best possible actuator inputs (steering & throttle) by finding the lowest cost trajectory. 
 
 ## Rubric Points
 
