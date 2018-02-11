@@ -132,7 +132,7 @@ int main() {
           double epsi = -atan(coeffs[1]); 
           
           /*************************************************************
-          * Step 4: Choose state after 100ms for solving
+          * Step 4: Find state after 100ms for solving
           *************************************************************/
           // Get the state after 100 ms & use the calculated state as current state
           
@@ -154,6 +154,10 @@ int main() {
           *************************************************************/
           auto vars = mpc.Solve(state, coeffs);
           
+          
+          /*************************************************************
+          * Step 6: Get the computed actuator values & the MPC predicted trajectory
+          *************************************************************/
           // NOTE: Remember to divide by deg2rad(25) before you send the steering value back.
           // Otherwise the values will be in between [-deg2rad(25), deg2rad(25] instead of [-1, 1].
           
