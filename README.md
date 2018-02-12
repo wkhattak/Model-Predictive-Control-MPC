@@ -42,6 +42,8 @@ I tried different combinations of *N* & *dt* and in the end settled for values o
 | 5 | 0.1 |Worked for a bit then crashed. MPC trajectory pointing in totally different direction.|
 | 20 | 0.1 |OK but it seems that on some occasions the MPC trajectory & the reference trajectory are not drawn properly & the car takes more extremes turns. Also this is more computationally taxing as the prediction horizon is large. Also, there’s no point in calculating points that are too much in future as they are simply thrown away with each successive call to the solver.|
 
+Another good reason for using a value of `0.1` for *dt* was that it synchronizes perfectly with the introduced latency of 100 ms (0.1 s).
+
 ### Polynomial Fitting and MPC Preprocessing
 
 A polynomial of degree 3 was fitted to the waypoints provided by the simulator in order to get the required *coefficients* for the *solver* & to be able to draw the reference trajectory (yellow line). The *coefficients* are further used to calculate the initial *cross track error* and the *orientation error*. However, before the waypoints can be used as in input for polynomial fitting, they need to be transformed from global (map) co-ordinate system to vehicle co-ordinate system as shown in the following code excerpt:  
@@ -88,7 +90,23 @@ double epsi = -atan(coeffs[1]);
 
 ### Model Predictive Control with Latency
 
+To simulator actuator control latency, a latency of 100 millisecond is added. In order to handle this latency, I used the Kinematic model equations to calculate the future state after `0.1 seconds` (100 milliseconds) and used that state to calculate the input control vector (predicted trajectory). Doing so enables to compensate for the latency as the state that solver is using is in fact the one where the car would be after the latency of 100 ms.
 
+```c++
+
+// This is the length from front to CoG that has a similar radius.
+const double Lf = 2.67; 
+// 0.1 = 100 ms latency
+const double x_future = v * 0.1;
+const double y_future = 0.0;
+const double psi_future = - v/Lf * steer_value * 0.1;         
+const double v_future = v + throttle_value * 0.1;
+const double cte_future = cte + v * sin(epsi) * 0.1;
+const double epsi_future = epsi - v/Lf * steer_value * 0.1;
+
+Eigen::VectorXd state(6);
+state << x_future, y_future, psi_future, v_future, cte_future, epsi_future;
+```
 
 ## Dependencies
 
