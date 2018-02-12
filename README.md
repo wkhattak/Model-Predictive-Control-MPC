@@ -108,6 +108,16 @@ Eigen::VectorXd state(6);
 state << x_future, y_future, psi_future, v_future, cte_future, epsi_future;
 ```
 
+### Model Coefficients Fine-tuning 
+
+To choose the best coefficients for the Kinematic model, I further employed a trial-and-error approach with summarized below:
+
+|Config. No.|CTE|Orientation Error|Velocity|Steering|Throttle|Steering Delta|Throttle Delta|Result| 
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|  			
+|1|2000|2000|1|5|5|200|10|OK|
+
+![Config 1](./images/result_0.png)
+
 ## Dependencies
 
 * cmake >= 3.5
