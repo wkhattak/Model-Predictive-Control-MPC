@@ -200,3 +200,23 @@ To choose the best coefficients for the Kinematic model, I further employed a tr
 2. Make a build directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
 4. Run it: `./mpc`.
+
+## Usage
+
+Follow the build instructions above. Once the program is running, start the simulator. You should see a *connected!!!* message upon successful connection between the simulator and the c++ program. Hit the *Start button*. 
+
+## Directory Structure
+
+* **images:** Directory containing writeup images
+* **src:** Directory containing c++ source files
+* **CMakeLists.txt:** File containing compilation instructions
+* **README.md:** Project readme file
+* **install-mac.sh:** Script for installing uWebSockets on Macintosh
+* **install-ubuntu.sh:** Script for installing uWebSockets on Ubuntu
+* **install_Ipopt_CppAD.md:** Installation instructions for Ipopt & CppAD libraries
+* **install_ipopt.sh:** Script for installing ipopt
+
+
+## License
+
+The content of this project is licensed under the [Creative Commons Attribution 3.0 license](https://creativecommons.org/licenses/by/3.0/us/deed.en_US).
