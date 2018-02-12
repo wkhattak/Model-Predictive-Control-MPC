@@ -110,13 +110,61 @@ state << x_future, y_future, psi_future, v_future, cte_future, epsi_future;
 
 ### Model Coefficients Fine-tuning 
 
-To choose the best coefficients for the Kinematic model, I further employed a trial-and-error approach with summarized below:
+To choose the best coefficients for the Kinematic model, I further employed a trial-and-error approach. I used different combinations of coefficient values for *CTE, Orientation Error, Velocity, Steering, Throttle, Steering Delta (change rate) & Throttle Delta (change rate)* and drew resulting graphs with the aim of getting a smooth ride with as less erratic actuations as possible. Based on the graphs, I settled for configuration no. 8. 
 
 |Config. No.|CTE|Orientation Error|Velocity|Steering|Throttle|Steering Delta|Throttle Delta|Result| 
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|  			
 |1|2000|2000|1|5|5|200|10|OK|
 
 ![Config 1](./images/result_0.png)
+---
+|Config. No.|CTE|Orientation Error|Velocity|Steering|Throttle|Steering Delta|Throttle Delta|Result| 
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|  			
+|2|3000|2000|500|100|100|500|100|Crash|
+
+![Config 2](./images/result_1.png)
+---
+|Config. No.|CTE|Orientation Error|Velocity|Steering|Throttle|Steering Delta|Throttle Delta|Result| 
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|  			
+|3|2000|2000|5|20|10|300|20|OK|
+
+![Config 3](./images/result_2.png)
+---
+|Config. No.|CTE|Orientation Error|Velocity|Steering|Throttle|Steering Delta|Throttle Delta|Result| 
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|  			
+|4|2000|2000|1|5|5|500|250|OK|
+
+![Config 4](./images/result_3.png)
+---
+|Config. No.|CTE|Orientation Error|Velocity|Steering|Throttle|Steering Delta|Throttle Delta|Result| 
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|  			
+|5|2000|2000|1|5|5|100|500|OK|
+
+![Config 5](./images/result_4.png)
+---
+|Config. No.|CTE|Orientation Error|Velocity|Steering|Throttle|Steering Delta|Throttle Delta|Result| 
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|  			
+|6|2000|2000|1|5|5|2000|1000|OK|
+
+![Config 6](./images/result_5.png)
+---
+|Config. No.|CTE|Orientation Error|Velocity|Steering|Throttle|Steering Delta|Throttle Delta|Result| 
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|  			
+|7|4000|2000|1|5|5|2000|1000|OK|
+
+![Config 7](./images/result_6.png)
+---
+|Config. No.|CTE|Orientation Error|Velocity|Steering|Throttle|Steering Delta|Throttle Delta|Result| 
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|  			
+|8|2000|2000|1|5|5|3000|2000|OK|
+
+![Config 8](./images/result_7.png)
+---
+|Config. No.|CTE|Orientation Error|Velocity|Steering|Throttle|Steering Delta|Throttle Delta|Result| 
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|  			
+|9|2000|2000|1|5|5|3500|3500|OK|
+
+![Config 9](./images/result_8.png)
 
 ## Dependencies
 
