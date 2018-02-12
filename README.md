@@ -47,43 +47,48 @@ I tried different combinations of *N* & *dt* and in the end settled for values o
 A polynomial of degree 3 was fitted to the waypoints provided by the simulator in order to get the required *coefficients* for the *solver* & to be able to draw the reference trajectory (yellow line). The *coefficients* are further used to calculate the initial *cross track error* and the *orientation error*. However, before the waypoints can be used as in input for polynomial fitting, they need to be transformed from global (map) co-ordinate system to vehicle co-ordinate system as shown in the following code excerpt:  
 
 ```c++
+
 double steer_value = j[1]["steering_angle"]; 
 double throttle_value = j[1]["throttle"]; 
-         
-          /*************************************************************
-          * Step 1: Transform waypoints (px,py) from global co-ordinate system to vehicle co-ordinate system 
-          *************************************************************/
-          // Make x,y co-ordinates 0
-          for (unsigned int i = 0; i < ptsx.size(); i++) {
-            double transformed_x = ptsx[i] - px;
-            double transformed_y = ptsy[i] - py;
-            
-            // Rotate points
-            ptsx[i] = transformed_x*cos(-psi) - transformed_y*sin(-psi);
-            ptsy[i] = transformed_x*sin(-psi) + transformed_y*cos(-psi);
-          }
-          
-          double* ptr_x = &ptsx[0]; // pointer at first x position
-          double* ptr_y = &ptsy[0]; // pointer at first y position
-          Eigen::Map<Eigen::VectorXd> waypoints_x(ptr_x, 6);
-          Eigen::Map<Eigen::VectorXd> waypoints_y(ptr_y, 6);
-          
-          /*************************************************************
-          * Step 2: Fit a polynomial to the transformed waypoints (order 3 as we have 6 points)
-          *************************************************************/
-          auto coeffs = polyfit(waypoints_x, waypoints_y, 3);
-          
-          /*************************************************************
-          * Step 3: Calculate initial CTE & Orientation error
-          *************************************************************/
-          // Using 0 because co-ordinates have been shifted so car's x,y & psi are all 0.
-          // Returned value is the y, which is basically our CTE
-          double cte = polyeval(coeffs, 0); 
-          
-          // Actual equation --> psi - atan(coeffs[1])
-          // but as psi is 0, so only left with -atan(coeffs[1])
-          double epsi = -atan(coeffs[1]); 
+
+/*************************************************************
+* Step 1: Transform waypoints (px,py) from global co-ordinate system to vehicle co-ordinate system 
+*************************************************************/
+// Make x,y co-ordinates 0
+for (unsigned int i = 0; i < ptsx.size(); i++) {
+double transformed_x = ptsx[i] - px;
+double transformed_y = ptsy[i] - py;
+
+// Rotate points
+ptsx[i] = transformed_x*cos(-psi) - transformed_y*sin(-psi);
+ptsy[i] = transformed_x*sin(-psi) + transformed_y*cos(-psi);
+}
+
+double* ptr_x = &ptsx[0]; // pointer at first x position
+double* ptr_y = &ptsy[0]; // pointer at first y position
+Eigen::Map<Eigen::VectorXd> waypoints_x(ptr_x, 6);
+Eigen::Map<Eigen::VectorXd> waypoints_y(ptr_y, 6);
+
+/*************************************************************
+* Step 2: Fit a polynomial to the transformed waypoints (order 3 as we have 6 points)
+*************************************************************/
+auto coeffs = polyfit(waypoints_x, waypoints_y, 3);
+
+/*************************************************************
+* Step 3: Calculate initial CTE & Orientation error
+*************************************************************/
+// Using 0 because co-ordinates have been shifted so car's x,y & psi are all 0.
+// Returned value is the y, which is basically our CTE
+double cte = polyeval(coeffs, 0); 
+
+// Actual equation --> psi - atan(coeffs[1])
+// but as psi is 0, so only left with -atan(coeffs[1])
+double epsi = -atan(coeffs[1]); 
 ```
+
+### Model Predictive Control with Latency
+
+
 
 ## Dependencies
 
