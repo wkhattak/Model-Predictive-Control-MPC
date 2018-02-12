@@ -90,7 +90,7 @@ double epsi = -atan(coeffs[1]);
 
 ### Model Predictive Control with Latency
 
-To simulator actuator control latency, a latency of 100 millisecond is added. In order to handle this latency, I used the Kinematic model equations to calculate the future state after `0.1 seconds` (100 milliseconds) and used that state to calculate the input control vector (predicted trajectory). Doing so enables to compensate for the latency as the state that solver is using is in fact the one where the car would be after the latency of 100 ms.
+To simulate actuator control latency, a latency of 100 millisecond is added. In order to handle this latency, I used the Kinematic model equations to calculate the future state after `0.1 seconds` (100 milliseconds) and used that state to calculate the input control vector (predicted trajectory). Doing so enables to compensate for the latency as the state that solver is using is in fact the one where the car would be after the latency of 100 ms.
 
 ```c++
 
